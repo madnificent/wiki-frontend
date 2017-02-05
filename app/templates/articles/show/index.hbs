@@ -1,6 +1,12 @@
 <div class="container">
   <h1>{{model.title}}</h1>
 
-  <pre>{{model.body}}</pre>
+  <div class="row">
+    <div class="col s12 m9">
+      <pre>{{model.body}}</pre>
+    </div>
+    <div class="col s12 m3">
+      {{link-to "Edit" "articles.show.edit" model=model classNames="btn"}}
+    </div>
+  </div>
 </div>
-
