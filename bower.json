@@ -1,5 +1,6 @@
 {
   "name": "wiki",
   "dependencies": {
+    "materialize": "0.97.6"
   }
 }
