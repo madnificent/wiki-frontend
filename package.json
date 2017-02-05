@@ -30,6 +30,7 @@
     "ember-cli-release": "^0.2.9",
     "ember-cli-sass": "5.3.1",
     "ember-cli-shims": "^1.0.2",
+    "ember-cli-showdown": "2.11.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
@@ -50,7 +51,8 @@
     "ember-truth-helpers": "1.2.0",
     "ember-welcome-page": "^2.0.2",
     "loader.js": "^4.0.10",
-    "node-sass": "^3.4.2"
+    "node-sass": "^3.4.2",
+    "showdown": "^1.6.3"
   },
   "engines": {
     "node": ">= 0.12.0"

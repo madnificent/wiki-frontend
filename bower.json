@@ -1,6 +1,7 @@
 {
   "name": "wiki",
   "dependencies": {
-    "materialize": "0.97.6"
+    "materialize": "0.97.6",
+    "showdown": "^1.6.3"
   }
 }
