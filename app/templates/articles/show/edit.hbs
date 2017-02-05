@@ -1,9 +1,20 @@
 <div class="container">
   <h1>Editing page</h1>
 
-  {{md-input label="Title of the article" value=model.title}}
+  <div class="row">
+    <div class="col s12 m9">
+      {{#if render-preview}}
+        {{markdown-to-html model.body}}
+      {{else}}
+        {{md-input label="Title of the article" value=model.title}}
 
-  {{md-textarea label="Body of the article" value=model.body}}
+        {{md-textarea label="Body of the article" value=model.body}}
 
-  {{md-btn action="save" text="Save"}}
+        {{md-btn action="save" text="Save"}}
+      {{/if}}
+    </div>
+    <div class="col s12 m3">
+      {{md-btn action=(action "togglePreview") text="Toggle Preview"}}
+    </div>
+  </div>
 </div>

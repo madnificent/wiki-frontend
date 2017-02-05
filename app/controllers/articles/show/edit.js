@@ -6,6 +6,9 @@ export default Ember.Controller.extend({
       this.get('model').save().then(
         () => this.transitionToRoute("articles.show", this.get('model'))
       );
+    },
+    togglePreview() {
+      this.toggleProperty('render-preview');
     }
   }
 });
