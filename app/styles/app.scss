@@ -13,7 +13,25 @@ $secondary-color: color("blue", "base");
 // Data table
 @import 'ember-data-table';
 
+// ember-selectize
+.selectize-control.multi .selectize-input [data-value] {
+    &, &.item.active {
+        text-shadow: inherit;
+        background-image: none;
+        filter: none;
+        border: none;
+    }
 
+    &.item.active {
+        background-color: $primary-color;
+    }
 
+    a {
+        border: none;
+        padding: 1px 0 0 0;
+    }
+
+    @extend .btn;
+}
 
 // Custom color settings go here

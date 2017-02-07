@@ -2,6 +2,7 @@
   "name": "wiki",
   "dependencies": {
     "materialize": "0.97.6",
-    "showdown": "^1.6.3"
+    "showdown": "^1.6.3",
+    "selectize": "miguelcobain/selectize.js#master"
   }
 }
