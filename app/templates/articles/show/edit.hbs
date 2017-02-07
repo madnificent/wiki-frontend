@@ -11,6 +11,25 @@
         {{md-textarea label="Body of the article" value=model.body}}
 
         {{md-btn action="save" text="Save"}}
+
+        <hr />
+
+        {{ember-selectize
+          content=selectizeTopics
+          optionValuePath="content.id"
+          optionLabelPath="content.title"
+          selection=selectedTopics
+          multiple=true
+          searchField=["body", "title"]
+          update-filter=(action "filterChanged")
+          create-item=(action "newTopic")
+          placeholder="Select some articles"}}
+
+        <ul>
+          {{#each selectedTopics as |topic|}}
+            <li>{{topic.title}}</li>
+          {{/each}}
+        </ul>
       {{/if}}
     </div>
     <div class="col s12 m3">
