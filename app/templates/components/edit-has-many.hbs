@@ -1,0 +1,11 @@
+{{ember-selectize
+  content=selectizeTopics
+  optionValuePath="content.id"
+  optionLabelPath="content.title"
+  selection=selectedTopics
+  multiple=true
+  searchField=["body", "title"]
+  update-filter=(action "filterChanged")
+  create-item=(action "newTopic")
+  placeholder="Select some articles"}}
+
