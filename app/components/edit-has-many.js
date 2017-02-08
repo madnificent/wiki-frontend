@@ -1,8 +1,13 @@
 import Ember from 'ember';
+import dynamicAlias from 'ember-dynamic-alias';
 
 export default Ember.Component.extend({
   selectableTopics: [],
-  selectedTopics: Ember.computed.alias('model.topics'),
+  relationship: 'model.topics',
+  linkType: 'topic',
+  store: Ember.inject.service('store'),
+  selectedTopics: [],
+  topicsAliasThing: dynamicAlias('relationship', 'selectedTopics'),
   selectizeTopics: Ember.computed( 'selectableTopics.[]', 'selectedtopics.@each.title', 'selectedTopics.[]', 'selectableTopics.@each.title', function() {
     const selectableTopics = this.get('selectableTopics') || [];
     const selectedTopics = this.get('selectedTopics') || [];
@@ -13,7 +18,8 @@ export default Ember.Component.extend({
   }),
   actions: {
     filterChanged(searchString) {
-      this.get('store').query('topic', { filter: searchString }).then(
+      type = this.get('modelType')
+      this.get('store').query(type, { filter: searchString }).then(
         (topics) => this.set('selectableTopics', topics)
       );
     },
@@ -28,4 +34,3 @@ export default Ember.Component.extend({
     }
   }
 });
-
