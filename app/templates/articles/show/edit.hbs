@@ -14,7 +14,10 @@
 
         <hr />
 
-        {{edit-has-many model=model}}
+        {{edit-has-many
+          model=model
+          relationship="topics"
+          linkedModelType="topic"}}
 
         <ul>
           {{#each selectedTopics as |topic|}}

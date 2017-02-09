@@ -2,34 +2,47 @@ import Ember from 'ember';
 import dynamicAlias from 'ember-dynamic-alias';
 
 export default Ember.Component.extend({
-  selectableTopics: [],
-  relationship: 'model.topics',
-  linkType: 'topic',
+  selectableItems: [],
+  relationship: 'items',
+  relationshipPath: Ember.computed( 'relationship', function() {
+    const relationship = this.get('relationship');
+    if( relationship ){
+      return `model.${relationship}`;
+    }
+  }),
+  linkedModelType: 'item',
+  shownAttribute: 'title',
+  optionLabelPath: Ember.computed( 'shownAttribute', function() {
+    return `content.${this.get('shownAttribute')}`;
+  }),
   store: Ember.inject.service('store'),
-  selectedTopics: [],
-  topicsAliasThing: dynamicAlias('relationship', 'selectedTopics'),
-  selectizeTopics: Ember.computed( 'selectableTopics.[]', 'selectedtopics.@each.title', 'selectedTopics.[]', 'selectableTopics.@each.title', function() {
-    const selectableTopics = this.get('selectableTopics') || [];
-    const selectedTopics = this.get('selectedTopics') || [];
-    const selectizeTopics = Ember.A();
-    selectableTopics.map( (topic) => selectizeTopics.push( topic ) );
-    selectedTopics.map( (topic) => selectizeTopics.push( topic ) );
-    return selectizeTopics;
+  selectedItems: [],
+  dynamicItemsAlias: dynamicAlias('relationshipPath', 'selectedItems'),
+  selectizeItems: Ember.computed( 'selectableItems.[]', 'selecteditems.@each.title', 'selectedItems.[]', 'selectableItems.@each.title', function() {
+    const selectableItems = this.get('selectableItems') || [];
+    const selectedItems = this.get('selectedItems') || [];
+    const selectizeItems = Ember.A();
+    selectableItems.map( (item) => selectizeItems.push( item ) );
+    selectedItems.map( (item) => selectizeItems.push( item ) );
+    return selectizeItems;
   }),
   actions: {
     filterChanged(searchString) {
-      type = this.get('modelType')
+      const type = this.get('linkedModelType');
       this.get('store').query(type, { filter: searchString }).then(
-        (topics) => this.set('selectableTopics', topics)
+        (items) => this.set('selectableItems', items)
       );
     },
-    newTopic( string ) {
-      const record = this.get('store').createRecord('topic', {
-        title: string,
-        articles: [this.get('model')]
-      });
+    newItem( string ) {
+      const type = this.get('linkedModelType');
+      const attr = this.get('shownAttribute');
+      const properties = {};
+      properties[attr] = string;
+
+      const record = this.get('store').createRecord( type, properties );
+      
       record.save().then(
-        (topic) => this.get('selectedTopics').pushObject(topic)
+        () => this.get('selectedItems').pushObject( record )
       );
     }
   }
