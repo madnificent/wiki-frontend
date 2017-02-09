@@ -15,6 +15,9 @@ export default Ember.Component.extend({
   optionLabelPath: Ember.computed( 'shownAttribute', function() {
     return `content.${this.get('shownAttribute')}`;
   }),
+  placeholder: Ember.computed('relationship', function() {
+    return `Select some ${this.get('relationship')}`;
+  }),
   store: Ember.inject.service('store'),
   selectedItems: [],
   dynamicItemsAlias: dynamicAlias('relationshipPath', 'selectedItems'),
