@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service('store'),
   selectedItems: [],
   dynamicItemsAlias: dynamicAlias('relationshipPath', 'selectedItems'),
-  selectizeItems: Ember.computed( 'selectableItems.[]', 'selecteditems.@each.title', 'selectedItems.[]', 'selectableItems.@each.title', function() {
+  selectizeItems: Ember.computed( 'selectedItems.@each.title', 'selectableItems.@each.title', function() {
     const selectableItems = this.get('selectableItems') || [];
     const selectedItems = this.get('selectedItems') || [];
     const selectizeItems = Ember.A();
